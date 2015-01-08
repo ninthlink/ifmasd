@@ -4,7 +4,7 @@ Donate link: http://mostafa-soufi.ir/donate/
 Tags: statistics, stats, visit, visitors, chart, browser, blog, today, yesterday, week, month, year, total, post, page, sidebar, summary, feedburner, hits, pagerank, google, alexa, live visit
 Requires at least: 3.0
 Tested up to: 4.1
-Stable tag: 8.7.1
+Stable tag: 8.7.2
 License: GPL2
 
 Complete statistics for your WordPress site.
@@ -214,6 +214,13 @@ BACKUP YOUR DATABASE BEFORE INSTALLING!  This release alters the table structure
 Support for old format substitution codes in the statistics reports has been removed, the upgrade now converts them to short codes but you should verify the report content after upgrading.
 
 == Changelog ==
+= 8.7.2 =
+* Added: shareaholic-bot to robots list.
+* Fixed: Robot threshold setting was not being saved.
+* Updated: Italian translation, thanks illatooscuro.
+* Updated: Arabic translation, thanks Hammad.
+* Updated: Honey pot page title now includes "Pot" in it.
+
 = 8.7.1 =
 * Fixed: Variable scope for the exclusion match/reason updated to protected from private to allow the GeoIP code to set them.  This could cause various issues including failed uploades depending on the error reporting level set for PHP.
 

@@ -13,20 +13,60 @@
  *
  * @package WordPress
  */
+
+$allowed_hosts = array(
+	'local' => 'localhost.ifmasandiego.org',
+	'dev' => 'www.nlkdev.net',
+	'live' => 'www.ifmasandiego.org'
+	);
+$this_host = $_SERVER['HTTP_HOST'];
+if (empty($this_host) || !isset($this_host) || !in_array($this_host, $allowed_hosts)) {
+	header($_SERVER['SERVER_PROTOCOL'].' 400 Bad Request');
+	exit;
+}
 // ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
-define('DB_NAME', 'nlk_ifmasd');
-/** MySQL database username */
-define('DB_USER', 'root');
-/** MySQL database password */
-define('DB_PASSWORD', '');
-/** MySQL hostname */
-define('DB_HOST', 'localhost');
+switch ($this_host) {
+	case $allowed_hosts['local']:
+		/** The name of the database for WordPress */
+		define('DB_NAME', 'nlk_ifmasd');
+		/** MySQL database username */
+		define('DB_USER', 'root');
+		/** MySQL database password */
+		define('DB_PASSWORD', '');
+		/** MySQL hostname */
+		define('DB_HOST', 'localhost');
+		break;
+	case $allowed_hosts['dev']:
+		/** The name of the database for WordPress */
+		define('DB_NAME', 'nlk_wrdp5');
+		/** MySQL database username */
+		define('DB_USER', 'nlk_wrdp5');
+		/** MySQL database password */
+		define('DB_PASSWORD', 'NJBr1w9bvVALHYH8');
+		/** MySQL hostname */
+		define('DB_HOST', 'localhost');
+		break;
+	case $allowed_hosts['live']:
+	default:
+		/** The name of the database for WordPress */
+		define('DB_NAME', 'nlk_ifmasd');
+		/** MySQL database username */
+		define('DB_USER', 'root');
+		/** MySQL database password */
+		define('DB_PASSWORD', '');
+		/** MySQL hostname */
+		define('DB_HOST', 'localhost');
+		break;
+}
+
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
 define('WP_CACHE', true);
+
+
+
 /**#@+
  * Authentication Unique Keys and Salts.
  *
