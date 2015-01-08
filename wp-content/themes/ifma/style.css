@@ -140,12 +140,14 @@ DESCRIPTION: Two-column fixed layout with one sidebar right of content
 }
 #nav-sidebar > div > ul > li.current-page-ancestor.menu-item-has-children,
 #nav-sidebar > div > ul > li.current-page-parent.menu-item-has-children,
-#nav-sidebar > div > ul > li.current-menu-item.menu-item-has-children {
+#nav-sidebar > div > ul > li.current-menu-item.menu-item-has-children,
+#nav-sidebar > div > ul > li.current-menu-parent.menu-item-has-children {
 	display: block;
 }
 #nav-sidebar > div > ul > li.current-page-ancestor.menu-item-has-children > a,
 #nav-sidebar > div > ul > li.current-page-parent.menu-item-has-children > a,
-#nav-sidebar > div > ul > li.current-menu-item.menu-item-has-children > a {
+#nav-sidebar > div > ul > li.current-menu-item.menu-item-has-children > a,
+#nav-sidebar > div > ul > li.current-menu-parent.menu-item-has-children > a {
 	font-size: 14px;
 	font-weight: 700;
 	text-decoration: none;
@@ -183,6 +185,10 @@ DESCRIPTION: Full width content with no sidebar; used for attachment pages
 	width: 900px;
 }
 
+/* datepicker */
+.datepicker.datepicker-dropdown {
+	z-index: 9999 !important;
+}
 
 /* =Fonts
 -------------------------------------------------------------- */
@@ -628,6 +634,14 @@ div.menu li {
 	font-weight: bold;
 	line-height: 18px;
 	padding: 9px 24px;
+}
+#content .tribe-events-calendar tr th,
+#content .tribe-events-calendar thead th {
+	color: #777;
+	font-size: 10px;
+	font-weight: bold;
+	line-height: 18px;
+	padding: 5px 10px;
 }
 #content tr td {
 	border-top: 1px solid #e7e7e7;
