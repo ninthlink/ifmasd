@@ -3,7 +3,7 @@
  * @package Import_Users_from_CSV
  */
 /*
-Plugin Name: Import Users from CSV
+Plugin Name: Import Users from CSV - IFMA Custom
 Plugin URI: http://wordpress.org/extend/plugins/import-users-from-csv/
 Description: Import Users data and metadata from a csv file.
 Version: 1.0.0
