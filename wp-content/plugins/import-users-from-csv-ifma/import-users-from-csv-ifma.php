@@ -229,6 +229,33 @@ class IS_IU_Import_Users {
 			'use_ssl', 'show_admin_bar_front', 'show_admin_bar_admin',
 			'role'
 		);
+		$ifma_fields_map		= array(
+			'userdata' => array(
+				'ID' => 'user_login',
+				'Informal' => 'nickname',
+				'First Name' => 'first_name',
+				'Last Name' => 'last_name',
+				'Email' => 'user_email',
+				),
+			'usermeta' => array(
+				'Mbr Type' => 'member_type',
+				'Middle Name' => 'middle_name',
+				'Designation' => 'designation',
+				'Company' => 'org_name',
+				'Title' => 'member_title',
+				'Address 1' => 'addr1',
+				'Address 2' => 'addr2',
+				'City' => 'city',
+				'State / Province' => 'theState',
+				'Zip' => 'zip',
+				'Country' => 'country',
+				'Work Phone' => 'phone1',
+				'Cell' => 'phone2',
+				'Fax' => 'phone3',
+				'Join Date' => 'date_joined',
+				'Paid Thru' => 'paid_thru',
+				),
+		);
 
 		include( plugin_dir_path( __FILE__ ) . 'class-readcsv.php' );
 
@@ -262,9 +289,16 @@ class IS_IU_Import_Users {
 				$column_name = $headers[$ckey];
 				$column = trim( $column );
 
-				if ( in_array( $column_name, $userdata_fields ) ) {
+				if ( array_key_exists( $column_name, $ifma_fields_map['userdata'] ) ) {
+					$userdata[ $ifma_fields_map['userdata'][$column_name] ] = $column;
+				}
+				else if ( in_array( $column_name, $userdata_fields ) ) {
 					$userdata[$column_name] = $column;
-				} else {
+				}
+				else if ( array_key_exists( $column_name, $ifma_fields_map['usermeta'] ) ) {
+					$usermeta[ $ifma_fields_map['usermeta'][$column_name] ] = ( $ifma_fields_map['usermeta'] == 'date_joined' || $ifma_fields_map['usermeta'] == 'paid_thru' ) ? strtotime($column) : $column;
+				}
+				else {
 					$usermeta[$column_name] = $column;
 				}
 			}
@@ -303,9 +337,9 @@ class IS_IU_Import_Users {
 			$userdata['show_admin_bar_front'] = 'false';
 			$userdata['show_admin_bar_admin'] = 'false';
 
-			$usermeta['_expire_user_date'] = strtotime($usermeta['Paid Thru']);
+			$usermeta['_expire_user_date'] = strtotime($usermeta['paid_thru']);
 			$usermeta['_expire_user_settings'] = 'a:5:{s:15:"default_to_role";s:0:"";s:14:"reset_password";b:0;s:5:"email";b:0;s:11:"email_admin";b:0;s:13:"remove_expiry";b:0;}';
-			$usermeta['_expire_user_expired'] = ( $usermeta['_expire_user_date'] < time() ) ? 'Y' : 'N';
+			$usermeta['_expire_user_expired'] = ( $usermeta['_expire_user_date'] < time() && $usermeta['_expire_user_date'] > 1 ) ? 'Y' : 'N';
 
 			$update = false;
 			if ( $user ) {
