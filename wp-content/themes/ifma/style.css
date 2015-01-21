@@ -1105,6 +1105,11 @@ img.aligncenter {
 	margin: 0 auto;
 }
 
+/* slider */
+.fullwidthbanner-container {
+	float: left;
+}
+
 
 /* =Navigation
 -------------------------------------------------------------- */
@@ -1447,6 +1452,7 @@ h3#reply-title {
 	display: inline-block;
 	height: 160px;
 	margin-right: 8px;
+	overflow: hidden;
 	padding: 10px;
 	vertical-align: top;
 	width:309px;
@@ -1478,18 +1484,21 @@ h3#reply-title {
 	display: block;
 	font-size: 22px;
 	line-height: 30px;
-	margin: 0;
+	/*margin: 0;*/
 	position: absolute;
-	right: -55px;
+	/*right: -55px;*/
 	text-align: center;
-	top: -30px;
+	/*top: -30px;*/
 	-webkit-transform: rotate(-90deg);
 	-moz-transform: rotate(-90deg);
 	-ms-transform: rotate(-90deg);
 	-o-transform: rotate(-90deg);
 	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-	transform-origin: 100% 100%;
-	width: 150px;
+	/*transform-origin: 100% 100%;*/
+	-webkit-transform-origin: 96% -112%;
+	transform-origin: 96% -112%;
+	/*width: 150px;*/
+	width: 100%;
 }
 #main .widget-area .home-top-widgets ul {
 	height: 100%;

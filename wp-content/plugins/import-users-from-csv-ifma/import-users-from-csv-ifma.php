@@ -241,7 +241,7 @@ class IS_IU_Import_Users {
 				'Mbr Type' => 'member_type',
 				'Middle Name' => 'middle_name',
 				'Designation' => 'designation',
-				'Company' => 'org_name',
+				'Company' => 'company',
 				'Title' => 'member_title',
 				'Address 1' => 'addr1',
 				'Address 2' => 'addr2',
@@ -249,7 +249,7 @@ class IS_IU_Import_Users {
 				'State / Province' => 'theState',
 				'Zip' => 'zip',
 				'Country' => 'country',
-				'Work Phone' => 'phone1',
+				'Work Phone' => 'phone_number',
 				'Cell' => 'phone2',
 				'Fax' => 'phone3',
 				'Join Date' => 'date_joined',
@@ -296,7 +296,7 @@ class IS_IU_Import_Users {
 					$userdata[$column_name] = $column;
 				}
 				else if ( array_key_exists( $column_name, $ifma_fields_map['usermeta'] ) ) {
-					$usermeta[ $ifma_fields_map['usermeta'][$column_name] ] = ( $ifma_fields_map['usermeta'] == 'date_joined' || $ifma_fields_map['usermeta'] == 'paid_thru' ) ? strtotime($column) : $column;
+					$usermeta[ $ifma_fields_map['usermeta'][$column_name] ] = $column;
 				}
 				else {
 					$usermeta[$column_name] = $column;
