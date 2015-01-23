@@ -254,6 +254,7 @@ class IS_IU_Import_Users {
 				'Fax' => 'phone3',
 				'Join Date' => 'date_joined',
 				'Paid Thru' => 'paid_thru',
+				'Business Type' => 'business_type',
 				),
 		);
 
@@ -337,7 +338,7 @@ class IS_IU_Import_Users {
 			$userdata['show_admin_bar_front'] = 'false';
 			$userdata['show_admin_bar_admin'] = 'false';
 
-			$usermeta['_expire_user_date'] = strtotime($usermeta['paid_thru']);
+			$usermeta['_expire_user_date'] = strtotime($usermeta['paid_thru']) + 86400;
 			$usermeta['_expire_user_settings'] = 'a:5:{s:15:"default_to_role";s:0:"";s:14:"reset_password";b:0;s:5:"email";b:0;s:11:"email_admin";b:0;s:13:"remove_expiry";b:0;}';
 			$usermeta['_expire_user_expired'] = ( $usermeta['_expire_user_date'] < time() && $usermeta['_expire_user_date'] > 1 ) ? 'Y' : 'N';
 

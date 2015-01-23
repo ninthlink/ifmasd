@@ -549,7 +549,7 @@ div.menu li {
 /* =Buttons
 -------------------------------------------------------------- */
 
-input[type="submit"].buttons {
+.buttons { 
 	background: none repeat scroll 0 0 #637382;
 	border: medium none;
 	border-radius: 5px 5px 5px 5px;
@@ -563,6 +563,11 @@ input[type="submit"].buttons {
 	margin-top: 1px;
 	padding: 8px 20px;
 	text-transform: uppercase;
+}
+.buttons.inverse {
+	background-color: #fff;
+	border: 1px solid #637382;
+	color: #637382 !important;
 }
 #searchsubmit {
 	background: none repeat scroll 0 0 #637382;
@@ -1552,6 +1557,24 @@ h3#reply-title {
 /* Footer widget areas */
 #footer-widget-area {
 }
+
+
+/* =Search Users
+-------------------------------------------------------------- */
+#search-users-form table {
+	width: auto;
+}
+#search-users-form table tr td {
+	padding: 2px 10px;
+}
+#search-users-form td:first-child {
+	text-align: right;
+}
+#search-users-results {
+	list-style: none;
+	margin-bottom: 20px;
+}
+
 
 
 /* =Social Icons
