@@ -166,7 +166,7 @@ class IS_IU_Import_Users {
 					<span class="description"><?php echo sprintf( __( 'You may want to see <a href="%s">the example of the CSV file</a>.' , 'import-users-from-csv'), plugin_dir_url(__FILE__).'examples/import.csv'); ?></span>
 				</td>
 			</tr>
-			<tr valign="top">
+			<!--tr valign="top">
 				<th scope="row"><?php _e( 'Notification' , 'import-users-from-csv'); ?></th>
 				<td><fieldset>
 					<legend class="screen-reader-text"><span><?php _e( 'Notification' , 'import-users-from-csv'); ?></span></legend>
@@ -185,13 +185,13 @@ class IS_IU_Import_Users {
 						<?php _e('Show password nag on new users signon', 'import-users-from-csv') ?>
 					</label>
 				</fieldset></td>
-			</tr>
+			</tr-->
 			<tr valign="top">
 				<th scope="row"><?php _e( 'Users update' , 'import-users-from-csv'); ?></th>
 				<td><fieldset>
 					<legend class="screen-reader-text"><span><?php _e( 'Users update' , 'import-users-from-csv' ); ?></span></legend>
 					<label for="users_update">
-						<input id="users_update" name="users_update" type="checkbox" value="1" />
+						<input id="users_update" name="users_update" type="checkbox" value="1" checked="checked" />
 						<?php _e( 'Update user when a username or email exists', 'import-users-from-csv' ) ;?>
 					</label>
 				</fieldset></td>
