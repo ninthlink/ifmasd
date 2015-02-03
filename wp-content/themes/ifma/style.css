@@ -931,6 +931,7 @@ body.page .edit-link {
 	float: left;
 	margin: 0;
 	margin-bottom: 12px;
+	min-height: 150px;
 	padding: 0;
 	width: 300px;
 }
