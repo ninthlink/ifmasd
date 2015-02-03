@@ -36,7 +36,7 @@
 			<div class="boardmember-part-r">
 				<h3 class="entry-title"><?php print( types_render_field('member-title', array('output'=>'raw')) ); ?></h3>
 				<span class="entry-contact">
-					<a href="mailto:<?php print( types_render_field('email-address', array('output'=>'raw')) ); ?>">Email</a> <a href="<?php echo get_permalink(); ?>">Bio</a> <?php if (types_render_field('linkedin-profile')) { ?><a href="<?php print( types_render_field('linkedin-profile', array('output'=>'raw')) ); ?>" target="_blank">LinkedIn</a><?php } ?>
+					<a href="mailto:<?php print( types_render_field('email-address', array('output'=>'raw')) ); ?>">Email</a> <a href="<?php echo get_permalink(); ?>">Bio</a> <?php if (types_render_field('linkedin-profile', array('output'=>'raw'))) { ?><a href="<?php print( types_render_field('linkedin-profile', array('output'=>'raw')) ); ?>" target="_blank">LinkedIn</a><?php } ?>
 				</span>
 				<div><?php the_title(); ?></div>
 				<?php print( types_render_field("member-awards", array("output"=>"html")) ); ?>
