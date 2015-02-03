@@ -138,12 +138,14 @@ DESCRIPTION: Two-column fixed layout with one sidebar right of content
 #nav-sidebar > div > ul > li {
 	display: none;
 }
+#nav-sidebar > div > ul > li.current_page_ancestor.menu-item-has-children,
 #nav-sidebar > div > ul > li.current-page-ancestor.menu-item-has-children,
 #nav-sidebar > div > ul > li.current-page-parent.menu-item-has-children,
 #nav-sidebar > div > ul > li.current-menu-item.menu-item-has-children,
 #nav-sidebar > div > ul > li.current-menu-parent.menu-item-has-children {
 	display: block;
 }
+#nav-sidebar > div > ul > li.current_page_ancestor.menu-item-has-children > a,
 #nav-sidebar > div > ul > li.current-page-ancestor.menu-item-has-children > a,
 #nav-sidebar > div > ul > li.current-page-parent.menu-item-has-children > a,
 #nav-sidebar > div > ul > li.current-menu-item.menu-item-has-children > a,
