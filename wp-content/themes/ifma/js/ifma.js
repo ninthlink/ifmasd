@@ -31,10 +31,10 @@
 			}
 			e5.height( h1 - ( h + 26 ) );
 		}
-		else if ( h2 > h1 ) { // if sidebar is taller than container
-			e1.height( h2 ); // set container equal to sidebar height
-			i = 0; // reset counter
-		}
+		//else if ( h2 > h1 ) { // if sidebar is taller than container
+		//	e1.height( h2 ); // set container equal to sidebar height
+		//	i = 0; // reset counter
+		//}
 		else {
 			// if heights match increment counter
 			i++;
