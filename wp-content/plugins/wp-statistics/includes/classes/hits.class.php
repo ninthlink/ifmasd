@@ -23,7 +23,7 @@
 		// Construction function.
 		public function __construct() {
 
-			global $wp_version;
+			global $wp_version, $WP_Statistics;
 					
 			// Call the parent constructor (WP_Statistics::__construct)
 			parent::__construct();
@@ -42,6 +42,18 @@
 			// Check to see if the user wants us to record why we're excluding hits.
 			if( $this->get_option('record_exclusions' ) == 1 ) {
 				$this->exclusion_record = TRUE;
+			}
+
+			// Let's check to see if our subnet matches a private IP address range, if so go ahead and set the location infomraiton now.
+			if( $this->get_option( 'private_country_code' ) != '000' && $this->get_option( 'private_country_code' ) != '') {
+				$private_subnets = array( '10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16', '127.0.0.1/24' );
+				
+				foreach( $private_subnets as $psub ) {
+					if( $this->net_match( $psub, $this->ip ) ) {
+						$this->location = $this->get_option( 'private_country_code' );
+						break;
+					}
+				}
 			}
 			
 			// The follow exclusion checks are done during the class construction so we don't have to execute them twice if we're tracking visits and visitors.
@@ -130,7 +142,7 @@
 
 				// Check to see if we are being referred to ourselves.
 				if( !$this->exclusion_match ) {
-					if( $ua_string == "WordPress/" . $wp_version . "; " . get_home_url("/") ) { $this->exclusion_match = TRUE; $this->exclusion_reason = "self referral"; }
+					if( $ua_string == "WordPress/" . $wp_version . "; " . get_home_url(null,"/") ) { $this->exclusion_match = TRUE; $this->exclusion_reason = "self referral"; }
 					if( $ua_string == "WordPress/" . $wp_version . "; " . get_home_url() ) { $this->exclusion_match = TRUE; $this->exclusion_reason = "self referral"; }
 
 					if( $this->get_option('exclude_loginpage') == 1 ) {
@@ -155,6 +167,12 @@
 						$currentURL = substr( $currentURL, 0, strlen( $adminURL ) );
 						
 						if( $currentURL == $adminURL ) { $this->exclusion_match = TRUE; $this->exclusion_reason = "admin page";}
+					}
+
+					if( $this->get_option('exclude_feeds') == 1 ) {
+						if( is_object( $WP_Statistics ) ) { 
+							if( $WP_Statistics->check_feed() ) { { $this->exclusion_match = TRUE; $this->exclusion_reason = "feed";} }
+						}
 					}
 					
 					// Check to see if we are excluding based on the user role.
@@ -221,7 +239,8 @@
 			   // 127.0.0.1/255.255.255.255 or 10.0.0.1 matches a given ip
 			   $ip_arr = explode('/', $network);
 			   
-			   if( !isset( $ip_arr[1] ) ) { $ip_arr[1] = 0; }
+			   // If no network mask has been passed in, assume 255.255.255.255 so we don't match every IP address by default.
+			   if( !isset( $ip_arr[1] ) ) { $ip_arr[1] = '255.255.255.255'; }
 			   
 			   $network_long = ip2long($ip_arr[0]);
 
@@ -241,29 +260,25 @@
 				// Check to see if we're a returning visitor.
 				$this->result = $this->db->get_row("SELECT * FROM {$this->tb_prefix}statistics_visit ORDER BY `{$this->tb_prefix}statistics_visit`.`ID` DESC");
 				
-				// Ignore more than one hit per second.
-				if( $this->result->last_visit != $this->Current_Date('Y-m-d H:i:s') ) {
+				// If we're a returning visitor, update the current record in the database, otherwise, create a new one.
+				if( $this->result->last_counter != $this->Current_Date('Y-m-d') ) {
+					// We'd normally use the WordPress insert function, but since we may run in to a race condition where another hit to the site has already created a new entry in the database
+					// for this IP address we want to do an "INSERT ... ON DUPLICATE KEY" which WordPress doesn't support.
+					$sqlstring = $this->db->prepare( 'INSERT INTO ' . $this->tb_prefix . 'statistics_visit (last_visit, last_counter, visit) VALUES ( %s, %s, %d) ON DUPLICATE KEY UPDATE visit = visit + ' . $this->coefficient, $this->Current_Date(), $this->Current_date('Y-m-d'), $this->coefficient );
 				
-					// If we're a returning visitor, update the current record in the database, otherwise, create a new one.
-					if( $this->result->last_counter != $this->Current_Date('Y-m-d') ) {
-						// We'd normally use the WordPress insert function, but since we may run in to a race condition where another hit to the site has already created a new entry in the database
-						// for this IP address we want to do an "INSERT ... ON DUPLICATE KEY" which WordPress doesn't support.
-						$sqlstring = $this->db->prepare( 'INSERT INTO ' . $this->tb_prefix . 'statistics_visit (last_visit, last_counter, visit) VALUES ( %s, %s, %d) ON DUPLICATE KEY UPDATE visit = visit + ' . $this->coefficient, $this->Current_Date(), $this->Current_date('Y-m-d'), $this->coefficient );
-					
-						$this->db->query( $sqlstring );
-					} else {
-					
-						$this->db->update(
-							$this->tb_prefix . "statistics_visit",
-							array(
-								'last_visit'	=>	$this->Current_Date(),
-								'visit'			=>	$this->result->visit + $this->coefficient
-							),
-							array(
-								'last_counter'	=>	$this->result->last_counter
-							)
-						);
-					}
+					$this->db->query( $sqlstring );
+				} else {
+				
+					$this->db->update(
+						$this->tb_prefix . "statistics_visit",
+						array(
+							'last_visit'	=>	$this->Current_Date(),
+							'visit'			=>	$this->result->visit + $this->coefficient
+						),
+						array(
+							'last_counter'	=>	$this->result->last_counter
+						)
+					);
 				}
 			}
 		}
@@ -274,8 +289,8 @@
 
 			// Get the pages or posts ID if it exists.
 			$this->current_page_id = $wp_query->get_queried_object_id();
-
-			if( $this->get_option( 'use_honeypot' ) && $this->get_option( 'honeypot_postid') > 0 && $this->get_option( 'honeypot_postid' ) == $this->current_page_id ) {
+			
+			if( $this->get_option( 'use_honeypot' ) && $this->get_option( 'honeypot_postid') > 0 && $this->get_option( 'honeypot_postid' ) == $this->current_page_id && $this->current_page_id > 0 ) {
 				$this->exclusion_match = TRUE;
 				$this->exclusion_reason = "honeypot";
 			}

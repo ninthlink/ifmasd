@@ -527,3 +527,13 @@ function ifma_get_gallery_images() {
 	return $images;
 }
 
+
+add_filter('tribe_get_events_title', 'change_upcoming_events_title');
+ 
+function change_upcoming_events_title($title) {
+    //We'll change the title on upcoming and map views
+    if (tribe_is_upcoming() or tribe_is_map() or tribe_is_photo()) return 'Upcoming Parties';
+ 
+    //In all other circumstances, leave the original title in place
+    return $title;
+}

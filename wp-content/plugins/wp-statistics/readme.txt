@@ -4,7 +4,7 @@ Donate link: http://mostafa-soufi.ir/donate/
 Tags: statistics, stats, visit, visitors, chart, browser, blog, today, yesterday, week, month, year, total, post, page, sidebar, summary, feedburner, hits, pagerank, google, alexa, live visit
 Requires at least: 3.0
 Tested up to: 4.1
-Stable tag: 8.7.2
+Stable tag: 8.8
 License: GPL2
 
 Complete statistics for your WordPress site.
@@ -214,6 +214,20 @@ BACKUP YOUR DATABASE BEFORE INSTALLING!  This release alters the table structure
 Support for old format substitution codes in the statistics reports has been removed, the upgrade now converts them to short codes but you should verify the report content after upgrading.
 
 == Changelog ==
+= 8.8 =
+* Added: Installation/upgrades/removals on WordPress multi-sites now upgrade all sites in the network if the installing user has the appropriate rights.
+* Added: RSS feed URL's can now be excluded.
+* Added: Option to set the country code for private IP addresses.
+* Fixed: Additional WP_DEBUG warning fixes.
+* Fixed: Incorrect parameter list in get_home_url() when checking for self referrals. 
+* Fixed: Single quotes can now be used in the report content without being escaped.
+* Fixed: Referrers menu item was misspelled.
+* Updated: Italian, French, Polish, Arabic, Persian and Chinese translation.
+* Updated: Widget now formats numbers with international standards.
+* Updated: Short codes now support three number formatting options; i18n, english or none.
+* Updated: Removed old throttling code for hits which is no longer required. 
+* Updated: IP address exclusions without a subnet mask now assume a single IP address instead of all IP addresses.
+
 = 8.7.2 =
 * Added: shareaholic-bot to robots list.
 * Fixed: Robot threshold setting was not being saved.

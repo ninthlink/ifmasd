@@ -1760,3 +1760,8 @@ code {
 		border: none;
 	}
 }
+
+
+/* =Events Calendar
+--------------------------------------------------*/
+.tribe-bar-disabled { display: none; }
