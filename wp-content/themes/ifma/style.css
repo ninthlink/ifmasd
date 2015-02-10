@@ -121,7 +121,7 @@ DESCRIPTION: Two-column fixed layout with one sidebar right of content
 #nav-sidebar ul {
 	margin: 0;
 }
-#nav-sidebar  a {
+#nav-sidebar a {
 	color: #fff;
 	font-family: arial, helvetica, sans-serif;
 	font-size: 14px;
@@ -155,7 +155,9 @@ DESCRIPTION: Two-column fixed layout with one sidebar right of content
 	text-decoration: none;
 	text-transform: uppercase;
 }
-#nav-sidebar ul ul li.current-menu-item a {
+#nav-sidebar ul ul li.current-menu-item a,
+#nav-sidebar ul ul li.current-menu-parent a,
+#nav-sidebar ul ul li.current-menu-ancestor a {
 	color: #AFCCDF;
 	font-weight: bold;
 	text-decoration: none;
@@ -1768,3 +1770,12 @@ code {
 /* =Events Calendar
 --------------------------------------------------*/
 .tribe-bar-disabled { display: none; }
+
+
+
+
+
+
+/* fixes and misc */
+p.tribe-events-widget-link { display: none; }
+.tribe-clearfix:before { display: none !important; }

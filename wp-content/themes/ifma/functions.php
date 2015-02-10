@@ -527,25 +527,3 @@ function ifma_get_gallery_images() {
 	return $images;
 }
 
-// Overrides every request for viewOption from TribeEvents::getOption()
-function tribe_swap_default_category_view ($option, $default, $optionName) {
-	
-	// For a list of acceptable views/values run print_r(tribe_events_enabled_views());
-
-	$default_events_view = 'month'; // The default view for the main page, venue, etc.
-	$default_category_view = 'list'; // The default view for any calendar category
-
-	if ($optionName === 'viewOption') {
-		// Default category view is saved as a rewrite rule
-		// Every other view checks viewOption on front-end page load
-		// Hack: Since rewrites are usually only saved/flushed from the admin area, check that
-		if( is_admin() ) {
-			$option = $default_category_view;
-		} else {
-			$option = $default_events_view;
-		}
-	}
-
-	return $option;
-}
-add_filter('tribe_get_single_option', 'tribe_swap_default_category_view', 1, 3);
