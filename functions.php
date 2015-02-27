@@ -588,10 +588,16 @@ if ( ! function_exists('ifma_login_logo') ) {
 		return 'IFMA San Diego';
 	}
 	add_filter( 'login_headertitle', 'ifma_login_logo_url_title' );
+
+	function ifma_login_stylesheet() {
+		wp_enqueue_style( 'custom-login', get_template_directory_uri() . '/style-login.css' );
+		//wp_enqueue_script( 'custom-login', get_template_directory_uri() . '/style-login.js' );
+	}
+	add_action( 'login_enqueue_scripts', 'ifma_login_stylesheet' );
 }
 
 /**
- * Redirect user after successful login.
+ * Redirect user after successful login/logout.
  *
  * @param string $redirect_to URL to redirect to.
  * @param string $request URL the user is coming from.
@@ -613,8 +619,12 @@ function ifma_login_redirect( $redirect_to, $request, $user ) {
 		return $redirect_to;
 	}
 }
-
 add_filter( 'login_redirect', 'ifma_login_redirect', 10, 3 );
+function ifma_logout_home(){
+	wp_redirect( home_url() );
+	exit();
+}
+add_action('wp_logout','ifma_logout_home');
 
 
 /**
