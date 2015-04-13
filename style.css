@@ -691,7 +691,7 @@ div.menu li {
 	padding: 18px 20px;
 }
 .single .hentry {
-	margin: 0 0 36px 0;
+	/* margin: 0 0 36px 0; */
 }
 .page-title {
 	color: #000;
@@ -1525,6 +1525,9 @@ h3#reply-title {
 	margin-bottom: 5px;
 }
 #main .widget-area .home-top-widgets > li:first-child {}
+#main .widget-area .home-top-widgets > li:first-child a {
+	color: #B0CBDE;
+}
 
 
 /* member spotlight customizations */
