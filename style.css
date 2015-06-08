@@ -751,7 +751,7 @@ div.menu li {
 .entry-meta a {
 	text-decoration: none;
 }
-.entry-date {
+#content .post .entry-date {
 	font-style: italic;
 	margin-bottom: 0;
 }
