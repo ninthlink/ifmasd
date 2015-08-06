@@ -16,7 +16,9 @@ get_header(); ?>
 		<div id="container" class="column-left">
 			<div id="content" role="main">
 
+			<?php if ( have_posts() ) while ( have_posts() ) : the_post(); ?>
 			<h1 class="page-title"><?php echo get_the_title(); ?></h1>
+			<?php endwhile; // end of the loop. ?>
 
 			<?php
 			/*
