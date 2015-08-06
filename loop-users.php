@@ -122,7 +122,7 @@ if ( $_POST ) {
 			<?php echo esc_html( $user->user_email ); ?><br />
 			<?php echo ( !empty($user->phone_number) ) ? 'Work Phone: ' . esc_html( $user->phone_number ) . '<br />' : ''; ?>
 			<?php echo ( !empty($user->phone3) ) ? 'Fax: ' . esc_html( $user->phone3 ) . '<br />' : ''; ?>
-			<?php echo ( !empty($user->business_type) ) ? 'Busniess Type: ' . esc_html( $user->business_type ) : ''; ?>
+			<?php //echo ( !empty($user->business_type) ) ? 'Busniess Type: ' . esc_html( $user->business_type ) : ''; ?>
 		</div>
 		<hr />
 	<?php } ?>
