@@ -16,7 +16,7 @@ get_header(); ?>
 		<div id="container" class="column-left">
 			<div id="content" role="main">
 
-			<?php get_template_part( 'part', 'pagetitle' ); ?>
+			<h1 class="page-title"><?php echo get_the_title(); ?></h1>
 
 			<?php
 			/*
