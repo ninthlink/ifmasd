@@ -1631,6 +1631,7 @@ a.icon.twitter {
 a.icon.youtube {
 	background-image: url(images/youtube_2014.png);
 }
+.home span[class*="st_"] { display: none; }
 
 
 /* =Footer
