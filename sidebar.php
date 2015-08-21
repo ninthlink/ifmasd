@@ -19,7 +19,7 @@
 	 * some default sidebar stuff just in case.
 	 */
 
-	if ( ! is_frontpage() && is_home() ) : ?>
+	if ( ! is_front_page() && is_home() ) : ?>
 
 		<div id="secondary" class="widget-area" role="complementary">
 			<ul class="xoxo">
