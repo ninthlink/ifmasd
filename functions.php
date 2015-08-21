@@ -371,6 +371,17 @@ function ifma_widgets_init() {
 		'after_title' => '</h3>',
 	) );
 
+	// Blog sidebar. Empty by default.
+	register_sidebar( array(
+		'name' => __( 'Blog Sidebar', 'ifma' ),
+		'id' => 'blog-sidebar-area',
+		'description' => __( 'Blog page sidebar.', 'ifma' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+
 	// Area 3, located in the footer. Empty by default.
 	register_sidebar( array(
 		'name' => __( 'First Footer Widget Area', 'ifma' ),

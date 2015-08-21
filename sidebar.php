@@ -19,7 +19,15 @@
 	 * some default sidebar stuff just in case.
 	 */
 
-	if ( is_active_sidebar( 'secondary-widget-area' ) ) : ?>
+	if ( ! is_frontpage() && is_home() ) : ?>
+
+		<div id="secondary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+				<?php dynamic_sidebar( 'blog-sidebar-area' ); ?>
+			</ul>
+		</div><!-- #secondary .widget-area -->
+
+	<?php elseif ( is_active_sidebar( 'secondary-widget-area' ) ) : ?>
 
 		<div id="secondary" class="widget-area" role="complementary">
 			<ul class="xoxo">
