@@ -1631,6 +1631,9 @@ a.icon.twitter {
 a.icon.youtube {
 	background-image: url(images/youtube_2014.png);
 }
+a.icon.instagram {
+	background-image: url(images/instagram_2015.png);
+}
 .home span[class*="st_"] { display: none; }
 
 
