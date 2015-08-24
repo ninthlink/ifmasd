@@ -1567,6 +1567,13 @@ body.home #secondary {
 #secondary.widget-area > ul > li:last-child {
 	border-bottom: none;
 }
+/* Blog sidebars */
+.blog #main .widget-area ul ul { margin-left: 0; }
+.blog #sidebar .widget-title { padding-bottom: 10px; }
+.blog #sidebar .widget_fetch_tweets_widget_by_id h3 { padding-bottom: 0; }
+.blog #sidebar ul li { list-style: none; }
+.blog #sidebar ul li a { color: #666; }
+.blog #sidebar .widget_archive ul li:nth-child(n+10) { display: none; }
 
 /* Footer widget areas */
 #footer-widget-area {
@@ -1624,6 +1631,7 @@ a.icon.twitter {
 a.icon.youtube {
 	background-image: url(images/youtube_2014.png);
 }
+.home span[class*="st_"] { display: none; }
 
 
 /* =Footer
