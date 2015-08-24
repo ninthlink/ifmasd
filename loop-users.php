@@ -57,7 +57,6 @@
 					<input type="text" name="company" value="<?php echo $_POST['company']; ?>" />
 				</td>
 			</tr>
-			<?php /*
 			<tr>
 				<td>
 					<label for="">Business Type:</label>
@@ -66,7 +65,6 @@
 					<input type="text" name="business_type" value="<?php echo $_POST['business_type']; ?>" />
 				</td>
 			</tr>
-			*/ ?>
 			<tr>
 				<td>
 					<label for="">City:</label>
